@@ -1,0 +1,58 @@
+PostgreSQL:
+
+CREATE TABLE IF NOT EXISTS ficha_doacao(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	idade INTEGER NOT NULL,
+	sexo VARCHAR(50) NOT NULL,
+	escolaridade VARCHAR(50) NOT NULL,
+	estado_civil VARCHAR(50) NOT NULL,
+	data_de_nascimento DATE NOT NULL,
+	identidade VARCHAR(50) NOT NULL,
+	tipo_sanguineo VARCHAR(50) NOT NULL,
+	UNIQUE(identidade)
+)
+
+
+CREATE TABLE IF NOT EXISTS coleta(
+	id SERIAL PRIMARY KEY,
+	data DATE NOT NULL,
+	ficha_doacao_id INTEGER REFERENCES Ficha_Doacao(id)
+)
+
+
+CREATE TABLE IF NOT EXISTS pre_triagem(
+	id SERIAL PRIMARY KEY,
+	peso DOUBLE PRECISION NOT NULL,
+	altura DOUBLE PRECISION NOT NULL,
+	pulso INTEGER NOT NULL,
+	pressao_arterial INTEGER NOT NULL,
+	hemoglobina DOUBLE PRECISION NOT NULL
+)
+
+
+CREATE TABLE IF NOT EXISTS triagem(
+	id SERIAL PRIMARY KEY,
+	entrevista VARCHAR(200) NOT NULL,
+	pre_triagem_id INTEGER REFERENCES Pre_Triagem(id)
+)
+
+
+CREATE TABLE IF NOT EXISTS ficha_paciente(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	cpf VARCHAR(11) NOT NULL,
+	medico VARCHAR(50) NOT NULL,
+	tipo_sanguineo VARCHAR(50) NOT NULL,
+	instituicao_de_saude VARCHAR(50) NOT NULL
+)
+
+
+CREATE TABLE IF NOT EXISTS bolsa_sanguinea(
+	id SERIAL PRIMARY KEY,
+	validade DATE NOT NULL,
+	tipo_sanguineo VARCHAR(50) NOT NULL
+)
+
+
+Equipe 3: LUIS HENRIQUE, JOÃO PAULO e JOSÉ VITOR
